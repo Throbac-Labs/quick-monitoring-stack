@@ -27,14 +27,14 @@ scrape_configs:
      cert_file: /tls/prometheus.crt 
      key_file: /tls/prometheus.key 
      insecure_skip_verify: true 
- - job_name: 'DOCKER-TARGET' 
+ - job_name: '${DOCKER_TARGET}' 
    static_configs: 
-     - targets: ['CONTAINER-ID:PORT-NUMBER']  # add the container ID of your target and if you use a diffrent port you can also configure it 
+     - targets: ['${DOCKER_TARGET}:${TARGET_PORT_NUMBER}']  # add the container ID of your target and if you use a diffrent port you can also configure it 
    scheme: https 
    tls_config: 
      insecure_skip_verify: true 
 remote_write: 
- - url: Grafana-Supplied-URL
+ - url: ${GRAFANA_PROMETHEUS_URL}
    basic_auth: 
-      username: Your-User-Name 
-      password: Your-Api-PW
+      username: ${GRAFANA_REMOTE_USERNAME}
+      password: ${GRAFANA_REMOTE_PASSWORD}
