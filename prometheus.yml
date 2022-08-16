@@ -23,9 +23,9 @@ scrape_configs:
      - targets: ['node_exporter:9100']  # add the container ID of your running node-exporter 
    scheme: https 
    tls_config:
-#    ca_file: /tls/prometheus.crt 
-#    cert_file: /tls/prometheus.crt 
-#    key_file: /tls/prometheus.key 
+     ca_file: /tls/prometheus.crt 
+     cert_file: /tls/prometheus.crt 
+     key_file: /tls/prometheus.key 
      insecure_skip_verify: true 
  - job_name: 'DOCKER-TARGET' 
    static_configs: 
