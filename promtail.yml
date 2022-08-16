@@ -1,0 +1,26 @@
+server:
+  http_listen_port: 9080 
+  grpc_listen_port: 0 
+positions: 
+  filename: /tmp/positions.yaml 
+clients: 
+  - url: ${GRAFANA_PROMTAIL_URL} 
+scrape_configs: 
+- job_name: system 
+  pipeline_stages: 
+  - docker: {} 
+  static_configs: 
+  - targets: 
+      - localhost 
+    labels: 
+      job: varlogsMatic 
+      __path__: /var/log/*log 
+- job_name: ${DOCKER_TARGET} 
+  pipeline_stages: 
+  - docker: {} 
+  static_configs: 
+  - targets: 
+      - localhost 
+    labels: 
+      job: ${DOCKER_TARGET} 
+      __path__: /var/lib/docker/containers/${LONGFORM_CONTAINER_ID}/*log
