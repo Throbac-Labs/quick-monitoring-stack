@@ -1,0 +1,54 @@
+version: '3.4'
+services:
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - exporterweb.yml:/etc/web.yml
+      - .tls/.node-exporter/node-exporter.key:/tls/node-exporter.key
+      - .tls/.node-exporter/node-exporter.crt:/tls/node-exporter.crt
+    env_file:
+      - .env
+    networks:
+      - ${NETWORK}
+    command: 
+      - --web.config=/etc/web.yml
+    restart: unless-stopped
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus.yml:/etc/prometheus/prometheus.yml
+      - .tls/.prometheus/prometheus.key:/tls/prometheus.key
+      - .tls/.prometheus/prometheus.crt:/tls/prometheus.crt
+      - prometheusweb.yml:/etc/prometheus/web.yml
+    env_file:
+      - .env
+    networks:
+      - ${NETWORK}
+    command: 
+      - --web.config.file=/etc/prometheus/web.yml
+    restart: unless-stopped
+
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:2.4.0
+     ports:
+      - "9080:9080"
+    volumes:
+      - promtail.yml:/mnt/config/promtail.yml
+      - /var/log:/var/log
+      - /var/lib/docker:/var/lib/docker
+    env_file:
+      - .env
+    networks:
+      - ${NETWORK}
+    command:
+      - -config.file=/mnt/config/promtail.yml
+      - -config.expand-env=true
+    restart: unless-stopped
