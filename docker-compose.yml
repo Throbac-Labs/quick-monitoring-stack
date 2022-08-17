@@ -38,7 +38,7 @@ services:
   promtail:
     container_name: promtail
     image: grafana/promtail:2.4.0
-     ports:
+    ports:
       - "9080:9080"
     volumes:
       - promtail.yml:/mnt/config/promtail.yml
