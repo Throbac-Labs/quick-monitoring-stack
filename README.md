@@ -9,7 +9,7 @@ Repo assumes use of Grafana cloud
 
 ## Create web auth pws for node exporter and prometheus
 ```
-sudo apt-get install httpd-tools
+sudo apt install apache2-utils
 ```
 Run 2x
 ```
