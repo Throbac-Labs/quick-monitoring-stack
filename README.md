@@ -11,5 +11,4 @@ Run 2x
 ```
 htpasswd -nBC 10 "" | tr -d ':\n'
 ```
-Save, and be prepared to add to exporterweb.yml and prometheusweb.yml
-
+Save, and be prepared to add to .env
