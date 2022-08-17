@@ -4,6 +4,8 @@ Repo assumes use of Grafana cloud
 
 - Run tls script
 - Create web auth pws for node exporter and prometheus
+- edit .env file
+- run docker compose
 
 ## Create web auth pws for node exporter and prometheus
 
