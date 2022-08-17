@@ -13,7 +13,7 @@ services:
       - .env
     networks:
       - ${NETWORK}
-    command: 
+    command:
       - --web.config=/etc/web.yml
     restart: unless-stopped
 
@@ -31,7 +31,7 @@ services:
       - .env
     networks:
       - ${NETWORK}
-    command: 
+    command:
       - --web.config.file=/etc/prometheus/web.yml
     restart: unless-stopped
 
